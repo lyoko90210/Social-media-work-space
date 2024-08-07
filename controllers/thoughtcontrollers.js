@@ -1,34 +1,36 @@
-const { Thought } = require('../models');
-const { deleteuser } = require('./thoughtcontrollers');
+const { Thought, User } = require('../models');
 
 module.exports = {
-  // Get all courses
+  // Get all thoughts
   async getthought(req, res) {
     try {
-      const users = await User.find()
-      res.json(users);
+      const thoughts = await Thought.find();
+      return res.json(thoughts);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   },
-  // Get a course
+
+  // Get a single thought
   async getSinglethought(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.userId })
-       
+      const thought = await Thought.findOne({ _id: req.params.thoughtId });
 
+      if (!thought) {
+        return res.status(404).json({ message: 'No thought with that ID' });
+      }
 
-
-      res.json(user);
+      return res.json(thought);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   },
-  // Create a course
+
+  // Create a thought
   async createthought(req, res) {
     try {
-      const user = await User.create(req.body);
-      return res.json(user);
+      const thought = await Thought.create(req.body);
+      return res.json(thought);
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
