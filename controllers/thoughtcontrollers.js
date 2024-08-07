@@ -40,14 +40,10 @@ module.exports = {
   // Delete a course
   async deletethought(req, res) {
     try {
-      const course = await Course.findOneAndDelete({ _id: req.params.userId });
+      const thought = await Thought.findOneAndDelete({ _id: req.params.thoughtId });
 
-      if (!course) {
-        return res.status(404).json({ message: 'No course with that ID' });
-      }
-
-      await Student.deleteMany({ _id: { $in: course.students } });
-      return res.json({ message: 'Course and students deleted!' });
+    
+      return res.json({ message: 'Thought deleted!' });
     } catch (err) {
       return res.status(500).json(err);
     }
@@ -56,8 +52,8 @@ module.exports = {
   // Update a course
   async updatethought (req, res) {
     try {
-      const course = await Course.findOneAndUpdate(
-        { _id: req.params.courseId },
+      const course = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
         { $set: req.body },
         { runValidators: true, new: true }
       );

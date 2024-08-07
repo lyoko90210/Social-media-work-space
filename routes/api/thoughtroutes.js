@@ -14,7 +14,7 @@ router.route('/').get(getthought).post(createthought);
 
 // localhost:3001/api/user/:userId
 router
-  .route('/:user')
+  .route('/:thoughtId')
   .get(getSinglethought)
   .put(updatethought)
   .delete(deletethought);

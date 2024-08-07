@@ -18,17 +18,12 @@ const thoughtSchema = new Schema(
           return this._createdAt;
         }
       },
-    username: 
+    userName: 
       {
         type: String,
         required: true,
 
       },
-    username: {
-      type: String,
-      required: true,
-      
-    },
     reactions: [reactionSchema],
   },
   {
