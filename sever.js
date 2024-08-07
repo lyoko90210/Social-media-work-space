@@ -9,9 +9,10 @@ const app = express();
 //middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-//localhost:3001
+
 app.use(routes);
 
+// base url localhost:3001/api
 db.once('open', () => {
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);

@@ -1,4 +1,5 @@
-const { User } = require('../models');
+const { Thought } = require('../models');
+const { deleteuser } = require('./thoughtcontrollers');
 
 module.exports = {
   // Get all courses
@@ -35,9 +36,9 @@ module.exports = {
   },
 
   // Delete a course
-  async deleteCourse(req, res) {
+  async deletethought(req, res) {
     try {
-      const course = await Course.findOneAndDelete({ _id: req.params.courseId });
+      const course = await Course.findOneAndDelete({ _id: req.params.userId });
 
       if (!course) {
         return res.status(404).json({ message: 'No course with that ID' });
@@ -51,7 +52,7 @@ module.exports = {
   },
 
   // Update a course
-  async updateCourse(req, res) {
+  async updatethought (req, res) {
     try {
       const course = await Course.findOneAndUpdate(
         { _id: req.params.courseId },

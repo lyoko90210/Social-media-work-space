@@ -34,34 +34,32 @@ module.exports = {
     }
   },
   // Delete a course
-  async deleteCourse(req, res) {
+  async deleteuser(req, res) {
     try {
-      const course = await Course.findOneAndDelete({ _id: req.params.courseId });
+      const course = await User.findOneAndDelete({ _id: req.params.userId });
 
       if (!course) {
         res.status(404).json({ message: 'No course with that ID' });
       }
-
-      await Student.deleteMany({ _id: { $in: course.students } });
       res.json({ message: 'Course and students deleted!' });
     } catch (err) {
       res.status(500).json(err);
     }
   },
   // Update a course
-  async updateCourse(req, res) {
+  async updateUser(req, res) {
     try {
-      const course = await Course.findOneAndUpdate(
-        { _id: req.params.courseId },
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
         { $set: req.body },
         { runValidators: true, new: true }
       );
 
-      if (!course) {
+      if (!user) {
         res.status(404).json({ message: 'No course with this id!' });
       }
 
-      res.json(course);
+      res.json(user);
     } catch (err) {
       res.status(500).json(err);
     }
